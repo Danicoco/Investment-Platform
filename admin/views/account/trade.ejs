@@ -1,0 +1,80 @@
+<%layout('layouts/tradeTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-9">
+                <p class="fs-3">All Trades</p>
+            </div>
+            <div class="col-md-3 ms-auto">
+                <a href="/account/new-trade" class="btn btn-primary">Create A Trade</a>
+            </div>
+        </div>
+        
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Trade Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Min. Amount</th>
+                  <th scope="col">Max. Amount</th>
+                  <th scope="col">Days</th>
+                  <th scope="col">Trade Percent</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Activate</th>
+                  <th scope="col">Pause</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%if(trade.length > 0){%>
+                    <%for(i=0; i < trade.length; i++){%>
+                        <tr>
+                            <td><%=trade[i].title%></td>
+                            <td><%=trade[i].description%></td>
+                            <td><%=trade[i].minimum%></td>
+                            <td><%=trade[i].maximum%></td>
+                            <td><%=trade[i].numberOfDays%></td>
+                            <td><%=trade[i].tradePercent%></td>
+                            <td><%=trade[i].status%></td>
+                            <td>
+                                <%if(trade[i].status !== 'Activated'){%>
+                                    <form action="/account/activate-trade?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=trade[i].id%>">
+                                        <button type="submit" class="btn btn-info">Activate Trade</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-info" disabled>Activate Trade</button>
+                                <%}%>
+                            </td>
+                            <td>
+                                <%if(trade[i].status !== 'Paused'){%>
+                                    <form action="/account/pause-trade?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=trade[i].id%>">
+                                        <button type="submit" class="btn btn-warning">Pause Trade</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-warning" disabled>Pause Trade</button>
+                                <%}%>
+                            </td>
+                            <td>
+                                <form action="/account/delete-trade?_method=DELETE" method="POST">
+                                    <input type="hidden" name="id" value="<%=trade[i].id%>">
+                                    <button type="submit" class="btn btn-danger">Delete Trade</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <%}%>
+                  <%} else {%>
+                    <p class="text-center">No trade created by Admin</p>
+                  <%}%>
+              
+            </tbody>
+        </table>
+    </div>
+</div>

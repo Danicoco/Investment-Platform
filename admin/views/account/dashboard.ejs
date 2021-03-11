@@ -1,0 +1,41 @@
+<%layout('layouts/dashboardTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <p class="fs-3">All Users</p>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Referral ID</th>
+                  <th scope="col">No. of Referred Users</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%if(user){%>
+                    <%for(i=0; i < user.length; i++){%>
+                        <tr>
+                            <td><%=user[i].name%></td>
+                            <td><%=user[i].email%></td>
+                            <td><%=user[i].phone%></td>
+                            <td><%=user[i].referralLink%></td>
+                            <td><%=user[i].referralCount%></td>
+                        </tr>
+                    <%}%>
+                  <%} else {%>
+                    <tr>
+                        <p class="text-center text-danger">No Registered User Yet</p>    
+                    </tr>
+                  <%}%>
+              
+            </tbody>
+        </table>
+    </div>
+</div>

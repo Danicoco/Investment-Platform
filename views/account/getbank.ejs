@@ -1,0 +1,63 @@
+<%layout('layouts/profileTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <div class="card bg-dark">
+          <div class="card-body">
+            <div class="text-center">
+              <img src="/static/image/logo.png" alt="" class="img-fluid">
+              <p class="text-muted">Referral link: <a href="http://<%=host%>/register?ref=<%=currentUser.referralLink%>" target="_blank">http://<%=host%>/register?ref=<%=currentUser.referralLink%></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card bg-dark">
+          <div class="card-body">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+              <div class="container-fluid">
+                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                  <ul class="navbar-nav nav-tabs me-auto mb-2 mb-lg-0">
+                    <!-- <ul class="nav nav-tabs"> -->
+                      <li class="nav-item">
+                        <a class="nav-link text-white fs-6" href="/account/profile">My Profile</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active fs-6" aria-current="page" href="/account/bank">Bank Details</a>
+                      </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <!-- Profile content starts -->
+            <form action="/account/update-bank?_method=PATCH" method="POST">
+                    <div class="mb-3">
+                      <label for="name" class="form-label text-white">Bank Name</label>
+                      <input type="text" class="form-control" name="bankName" value="<%=bank.bankName%>">
+                    </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label text-white">Account Name</label>
+                      <input type="text" class="form-control" name="accountName" value="<%=bank.accountName%>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label text-white">Account Number</label>
+                        <input type="text" class="form-control" name="accountNumber" value="<%=bank.accountNumber%>">
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-info">Change Bank Details</button>
+                      </div>
+                </form>
+            <!-- Profiel content ends -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

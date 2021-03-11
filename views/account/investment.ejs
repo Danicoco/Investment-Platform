@@ -1,0 +1,27 @@
+<%layout('layouts/investTemplate')%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row mt-3">
+            <%if(trade.length > 0){%>
+                <%for(i = 0; i < trade.length; i++){%>
+                    <div class="col-md-4">
+                        <div class="card bg-dark">
+                            <div class="card-body">
+                                <p class="fw-bolder fs-3 text-center text-white"><%=trade[i].title%></p>
+                                <p class="fs-5 text-white">Minimum Amount: <i class="lni lni-bitcoin"></i> <%=trade[i].minimum%> </p>
+                                <p class="fs-5 text-white">Maximum Amount: <i class="lni lni-bitcoin"></i> <%=trade[i].maximum%></p>
+                                <p class="fs-6 text-white">Description: <%=trade[i].description%>
+                                </p>
+                                <div class="d-grid gap-2">
+                                    <a href="/invest/penny/<%=trade[i].id%>" class="btn btn-success">Invest Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            <%} else{%>
+                <p class="text-center text-danger">No trade availabe at the moment</p>
+            <%}%>
+        </div>
+    </div>
+</div>

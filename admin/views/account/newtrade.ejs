@@ -1,0 +1,50 @@
+<%layout('layouts/tradeTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row my-3">
+            <div class="col-md-6">
+                <p class="fs-3">Create A New Trade</p>
+                <form action="/account/new-trade" method="POST">
+                    <div class="mb-3">
+                      <label for="title" class="form-label">Title</label>
+                      <input type="text" class="form-control" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" name="description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="minimumamount" class="form-label">Minimum Amount</label>
+                        <input type="text" class="form-control" name="minimum">
+                    </div>
+                    <div class="mb-3">
+                        <label for="maximumamount" class="form-label">Maximum Amount</label>
+                        <input type="text" class="form-control" name="maximum">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numberOfDays" class="form-label">Number of Days</label>
+                        <input type="text" class="form-control" name="numberOfDays">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tradePercent" class="form-label">Percentage (e.g. 20%)</label>
+                        <input type="text" class="form-control" name="tradePercent">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bitcoinWallet" class="form-label">Bitcoin Wallet</label>
+                        <input type="text" class="form-control" name="bitcoinWallet">
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Create Trade</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>

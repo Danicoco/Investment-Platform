@@ -1,0 +1,21 @@
+<%layout('layouts/investTemplate')%>
+<form action="/account/new-trade" method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" name="title">
+    </div>
+    <div class="mb-3">
+        <label for="minimumamount" class="form-label">Minimum Amount</label>
+        <input type="text" class="form-control" name="minimum">
+    </div>
+    <div class="mb-3">
+        <label for="maximumamount" class="form-label">Maximum Amount</label>
+        <input type="text" class="form-control" name="maximum">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description">
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>

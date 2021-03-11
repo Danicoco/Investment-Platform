@@ -1,0 +1,65 @@
+<%layout('layouts/profileTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <div class="card bg-dark current-profile">
+          <div class="card-body">
+            <div class="text-center">
+              <img src="/static/image/logo.png" alt="" class="img-fluid">
+              <p class="text-muted">Referral link: <a href="http://<%=host%>/register/<%=currentUser.referralLink%>" target="_blank">http://<%=host%>/register/<%=currentUser.referralLink%></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card bg-dark current-profile">
+          <div class="card-body">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+              <div class="container-fluid">
+                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                  <ul class="navbar-nav nav-tabs me-auto mb-2 mb-lg-0">
+                    <!-- <ul class="nav nav-tabs"> -->
+                      <li class="nav-item">
+                        <a class="nav-link active fs-6" aria-current="page" href="/account/profile">My Profile</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white fs-6" href="/account/bank">Bank Details</a>
+                      </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <!-- Profile content starts -->
+            <div class="mx-3">
+            <form action="/account/profile?_method=PATCH" method="POST">
+              <div class="mb-3">
+                <label for="name" class="form-label text-white">Name</label>
+                <input type="text" class="form-control" name="name" value="<%=currentUser.name%>">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label text-white">Email</label>
+                <input type="text" class="form-control" name="email" value="<%=currentUser.email%>">
+              </div>
+              <div class="mb-3">
+                  <label for="phone" class="form-label text-white">Phone Number</label>
+                  <input type="text" class="form-control" name="phone" value="<%=currentUser.phone%>">
+                </div>
+                <div class="text-center mb-3">
+                  <button type="submit" class="btn btn-info">Update Profile</button>
+                </div>
+            </form>
+          </div>
+            <!-- Profiel content ends -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

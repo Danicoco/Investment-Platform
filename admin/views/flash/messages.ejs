@@ -1,0 +1,14 @@
+<%if(error !== ''){%>
+    <%error.forEach(function(error){%>
+            <div class="text-center">
+                <p class="text-danger"><%=error%></p> 
+            </div>
+    <%})%>
+  <%}%>
+  <%if(success !== ''){%>
+    <%success.forEach(function(success){%>
+            <div class="text-center">
+                <p class="text-success"><%=success%></p>
+            </div>
+      <%})%>
+  <%}%>

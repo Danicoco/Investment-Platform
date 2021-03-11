@@ -1,0 +1,42 @@
+<%layout('layouts/investTemplate')%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                           <p class="text-white">Description: You're about to place investment in <%=trade.title%>.
+                           </p> 
+                           <p class="fs-5 text-white">Minimum Amount: <i class="lni lni-bitcoin"></i> <%=trade.minimum%> </p>
+                           <p class="fs-5 text-white">Maximum Amount: <i class="lni lni-bitcoin"></i> <%=trade.maximum%></p>
+                           <p class="text-white">Kindly send bitcoin into the wallet below, screenshot your payment then fill the form on this page 
+                               to invest. 
+                            </p>
+                            <p class="text-white fs-6 bd">Bitcoin Wallet: <%=trade.bitcoinWallet%></p>
+                            <%- include('../flash/messages') %>
+                            <form action="/invest/penny/<%=trade.id%>" method="POST" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                  <label for="amount" class="form-label text-white">Amount To Invest</label>
+                                  <select class="form-select" aria-label="amount" name="amount">
+                                    <%for(i=trade.minimum; i < trade.maximum; i++){%>
+                                            <option><%=i%></option>
+                                    <%}%>
+                                  </select>
+                                </div>
+                                <input type="hidden" class="form-control" name="days" value="<%=trade.numberOfDays%>">
+                                <input type="hidden" class="form-control" name="plan" value="<%=trade.title%>">
+                                <input type="hidden" class="form-control" name="percent" value="<%=trade.tradePercent%>">
+                                <div class="mb-3">
+                                    <label for="image" class="form-label text-white">POP</label>
+                                    <input type="file" class="form-control" name="pop">
+                                  </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Place Investment</button>
+                                </div>
+                              </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

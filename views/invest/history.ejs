@@ -1,0 +1,36 @@
+<%layout('layouts/historyTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row mt-4">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%if(invest.length > 0){%>
+                        <%for(i=0; i < invest.length; i++){%>
+                            <tr>
+                                <td><%=moment(invest[i].createdAt).format('MMMM Do YYYY, h:mm a');%></td>
+                                <td><%=invest[i].amount%></td>
+                                <td><%=invest[i].status%></td>
+                            </tr>
+                        <%}%>
+                      <%} else {%>
+                            <p class="text-center text-danger">You're Yet To Invest</p>
+                      <%}%>
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

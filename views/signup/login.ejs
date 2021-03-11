@@ -1,0 +1,32 @@
+<%layout('layouts/usesTemplate')%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="text-uppercase mt-5 mb-3 ms-3">Login</h3>
+                <div class="ms-3">
+                    <form action="/login" method="POST">
+                      <%- include('../flash/messages') %>
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Email address</label>
+                          <input type="text" class="form-control" name="email">
+                        </div>
+                        <div class="mb-3">
+                          <label for="password" class="form-label">Password</label>
+                          <input type="password" class="form-control" name="password">
+                        </div>
+              
+                        <div class="d-grid gap-2">
+                          <button class="btn btn-primary" type="submit">Login</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="bout">
+                    <img src="/static/image/invest.png" alt="" class="img-out">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

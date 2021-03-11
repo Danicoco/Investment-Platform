@@ -1,0 +1,64 @@
+<%layout('layouts/referralTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <p class="fs-3">All Referral Withdrawal Request</p>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Name of Investor</th>
+                  <th scope="col">Email of Investor</th>
+                  <th scope="col">Amount Requested</th>
+                  <th scope="col">Testimony</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Confirm Withdrawal</th>
+                  <th scope="col">Decline Withdrawal</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%if(referral.length > 0){%>
+                    <%for(i=0; i < referral.length; i++){%>
+                        <tr>
+                            <td><%=referral[i].mowners.name%></td>
+                            <td><%=referral[i].mowners.email%></td>
+                            <td><%=referral[i].amount%></td>
+                            <td><%=referral[i].testimony%></td>
+                            <td><%=referral[i].status%></td>
+                            <td>
+                                <%if(referral[i].status !== 'confirmed'){%>
+                                    <form action="/account/confirm-referral?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=referral[i].id%>">
+                                        <button type="submit" class="btn btn-info">Confirm Withdrawal</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-info" disabled>Confirm Withdrawal</button>
+                                <%}%>
+                                
+                            </td>
+                            <td>
+                                <%if(referral[i].status !== 'declined'){%>
+                                    <form action="/account/decline-referral?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=referral[i].id%>">
+                                        <button type="submit" class="btn btn-warning">Decline Withdrawal</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-warning" disabled>Decline Withdrawal</button>
+                                <%}%>
+                            </td>
+                        </tr>
+                    <%}%>
+                  <%} else {%>
+                    <tr>
+                        <p class="text-center text-danger">No User have requested for Referral Withdrawal Yet</p>
+                    </tr>
+                  <%}%>
+              
+            </tbody>
+        </table>
+    </div>
+</div>

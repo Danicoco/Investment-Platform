@@ -1,0 +1,73 @@
+<%layout('layouts/investTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <p class="fs-3">All Investments</p>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Name of Investor</th>
+                  <th scope="col">Email of Investor</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Confirm Investment</th>
+                  <th scope="col">Decline Investment</th>
+                  <th scope="col">Delete Investment</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%if(invest.length > 0){%>
+                    <%for(i=0; i < invest.length; i++){%>
+                        <tr>
+                            <td><%=invest[i].mowners.name%></td>
+                            <td><%=invest[i].mowners.email%></td>
+                            <td><%=invest[i].amount%></td>
+                            <td>
+                                <img src="<%=invest[i].image%>" alt="" class="image-fluid" width="100px">
+                                <p><a href="<%=invest[i].image%>" target="_blank">View full image</a></p> 
+                            </td>
+                            <td><%=invest[i].status%></td>
+                            <td>
+                                <%if(invest[i].status !== 'confirmed'){%>
+                                    <form action="/account/confirm-invest?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=invest[i].id%>">
+                                        <button type="submit" class="btn btn-info">Confirm Investment</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-info" disabled>Confirm Investment</button>
+                                <%}%>
+                            </td>
+                            <td>
+                                <%if(invest[i].status !== 'declined'){%>
+                                    <form action="/account/decline-invest?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=invest[i].id%>">
+                                        <button type="submit" class="btn btn-warning">Decline Investment</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-warning" disabled>Decline Investment</button>
+                                <%}%>
+                            </td>
+                            <td>
+                                <form action="/account/delete-invest?_method=DELETE" method="POST">
+                                    <input type="hidden" name="id" value="<%=invest[i].id%>">
+                                    <button type="submit" class="btn btn-danger">Delete Investment</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <%}%>
+                  <%} else {%>
+                    <tr>
+                        <p class="text-center text-danger">No Investment Made Yet</p>
+                    </tr>
+                  <%}%>
+              
+            </tbody>
+        </table>
+    </div>
+</div>

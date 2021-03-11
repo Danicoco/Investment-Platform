@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+.font-sans{
+    font-family: 'PT Sans', sans-serif;
+}
+
+.font-ss{
+    font-family: 'PT Sans', sans-serif;
+}
+
+.bout{
+    height: 100%;
+}
+
+.img-out{
+    width: 100%;
+    height: 51.7vmax;
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+}

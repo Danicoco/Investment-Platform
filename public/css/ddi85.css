@@ -1,0 +1,54 @@
+.sunshine{
+    font-size: 5rem;
+    color: yellow;
+}
+
+.cloud{
+    font-size: 5rem;
+    color: gray;
+}
+
+.moon{
+    font-size: 5rem;
+    color: blue;
+}
+
+.naira{
+    text-decoration-style: double;
+}
+
+.outline{
+    border-bottom: 2px solid #ffffff;
+    border-top: 2px solid #ffffff;
+    border-bottom-left-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+    border-top-left-radius: 5rem;
+    border-top-right-radius: 5rem;
+    width: 80vmin;
+    margin: 0 auto;
+    padding: 1.50rem 1.50rem 1.50rem 1.50rem;
+    height: 40vw;
+    box-shadow: 0.43rem 0.22rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+.card-height{
+    height: 10rem;
+}
+
+.l-height{
+   color: brown;
+}
+
+.current{
+    border: 0.25rem solid #ffffff;
+    margin: 0 auto;
+}
+
+.current-profile{
+    height: 26rem;
+}
+
+.bd{
+    border: 2px solid #ffffff;
+    padding: 0.25rem;
+}

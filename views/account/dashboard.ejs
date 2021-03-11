@@ -1,0 +1,234 @@
+<%layout('layouts/dashboardTemplate')%>
+<div class="row">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <%var morning = ['6 hours ago', '7 hours ago', '8 hours ago', '9 hours ago', '10 hours ago', '11 hours ago', '12 hours ago']%>
+                    <%var afternoon = ['13 hours ago', '14 hours ago', '15 hours ago', '16 hours ago']%>
+                    <%var evening = ['17 hours ago', '18 hours ago', '19 hours ago', '20 hours ago', '21 hours ago', '22 hours ago', '23 hours ago']%>
+                    <%var midnight = ['0 hour ago', '1 hour ago', '2 hours ago', '3 hours ago', '4 hours ago', '5 hours ago']%>
+                    <%if(morning.includes(moment().startOf('day').fromNow())){%>
+                        <i class="lni lni-sun sunshine"></i>
+                        <p class="text-uppercase fw-bolder fs-3">Good Morning, <%=currentUser.name%></p>
+                    <%}%>
+                    <%if(afternoon.includes(moment().startOf('day').fromNow())){%>
+                        <i class="lni lni-sun sunshine"></i>
+                        <p class="text-uppercase fw-bolder fs-3">Good Afternoon, <%=currentUser.name%></p>
+                    <%}%>
+                    <%if(evening.includes(moment().startOf('day').fromNow())){%>
+                        <i class="lni lni-cloud cloud"></i>
+                        <p class="text-uppercase fw-bolder fs-3">Good Evening, <%=currentUser.name%></p>
+                    <%}%>
+                    <%if(midnight.includes(moment().startOf('day').fromNow())){%>
+                        <i class="lni lni-night moon"></i>
+                        <p class="text-uppercase fw-bolder fs-3">This is midnight, <%=currentUser.name%></p>
+                    <%}%>
+                    
+                </div>
+                <div class="col-md-3 mt-5">
+                    <div class="card card-height">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <i class="lni lni-save text-success lni-32"></i>
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="fs-4"><del class="naira">N</del><%=currentUser.totalWithdrawal%></p>
+                                    <p class="fs-6">Total Withdrawal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-5">
+                    <div class="card card-height">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <i class="lni lni-package text-danger lni-32"></i>                                </div>
+                                <div class="col-md-9">
+                                    <p class="fs-4"><del class="naira">N</del><%=currentUser.avaliableMoney%></p>
+                                    <p class="fs-6">Aval. Withdrawal</p>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Withdraw</button>
+        
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Withdrawal</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="fw-bold fs-5">Balance: <del class="naira">N</del> <%=currentUser.avaliableMoney%></p>
+                                            <p class="text-muted text-center">How much will you like to withdraw?</p>
+                                            <form action="/account/withdraw" method="POST">
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Amount</label>
+                                                <input type="number" class="form-control" name="amount">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Testimony</label>
+                                                <textarea class="form-control" name="testimony"></textarea>
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button type="submit" class="btn btn-warning">Withdraw</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-5">
+                    <div class="card card-height">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <i class="lni lni-cog l-height lni-32"></i>
+                                </div>
+                                <div class="col-md-9">
+                                    <p class="fs-4"><del class="naira">N</del><%=currentUser.referralBonus%></p>
+                                    
+                                    <p class="fs-6">Referral Bonus</p>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#referral" data-bs-whatever="@getbootstrap">Withdraw</button>
+        
+                                    <div class="modal fade" id="referral" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Referral Bonus</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="fw-bold fs-5">Balance: <del class="naira">N</del> <%=currentUser.referralBonus%></p>
+                                            <p class="text-muted text-center">How much will you like to withdraw?</p>
+                                            <form action="/account/referral" method="POST">
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Amount</label>
+                                                <input type="number" class="form-control" name="amount">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Testimony</label>
+                                                <textarea class="form-control" name="testimony"></textarea>
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button type="submit" class="btn btn-warning">Withdraw</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%if(bank === null){%>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="text-center bg-dark text-white py-4">
+                <a href="/account/bank" class="btn btn-success">Update Your Bank account</a>
+            </div>
+        </div>
+    </div>
+<%}%>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card bg-info">
+            <div class="card-body">
+                <p class="text-white fs-5"><i class="lni lni-alarm-clock lni-16"></i> Note: Investment Period is from 10am to 12pm on Monday - Sunday</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <%if(invest.length > 0){%>
+                    <%for(i=0; i < invest.length; i++){%>
+                        <%if(invest[i].status === 'confirmed'){%>
+                        <div class="card bg-dark mt-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 card-header">
+                                        <h3 class="text-center fs-2 text-primary">Current Investment</h3>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <p class="text-center fs-5 text-white">Investment Plan: <%=invest[i].plan%></p>
+                                        <p class="text-center fs-5 text-white">Amount Invested: <i class="lni lni-bitcoin"></i><%=invest[i].amount%></p>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <p class="text-center fs-5 text-white">Status: <%=invest[i].status%></p>
+                                        <p class="text-center fs-5 text-white">Guaranteed Return: <i class="lni lni-bitcoin"></i><%=invest[i].guaranteeReturn%>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12 mt-4">
+                                        <p class="text-center fs-5 text-muted">Return Date: 
+                                            <%=moment(invest[i].updatedAt).add(7, 'd').format('MMMM Do YYYY, h:mm:ss');%>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <%} else if(invest[i].status === 'pending'){%>
+                        <div class="card bg-dark mt-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 card-header">
+                                        <h3 class="text-center fs-2 text-primary">Pending Investment</h3>
+                                    </div>
+                                    <p class="text-center text-muted fw-bolder fs-5 fst-italic mt-3">You've a pending investment. It'll become active once admin confirm your payment</p>
+                                </div>
+                            </div>
+                        </div>
+                    <%}%>
+                    <%}%>
+                <%} else { %>
+                    <div class="card bg-dark">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 card-header">
+                                    <h3 class="text-center fs-2 text-primary">Current Investments</h3>
+                                </div>
+                                <p class="text-center text-muted fw-bolder fs-5 fst-italic mt-3">Your current investments will show here</p>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Telegram group -->
+<div class="row my-4">
+    <div class="col-md-12">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <p class="fs-5 text-white text-center"><a href="#">Join our Telegram group</a></p>
+            </div>
+        </div>
+    </div>
+</div>

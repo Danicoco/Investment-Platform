@@ -1,0 +1,61 @@
+<%layout('layouts/withdrawalTemplate')%>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <%- include('../flash/messages') %>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <p class="fs-3">All Withdrawal</p>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Name of Investor</th>
+                  <th scope="col">Email of Investor</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Confirm Withdrawal</th>
+                  <th scope="col">Decline Withdrawal</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <%if(withdrawal.length > 0){%>
+                    <%for(i=0; i < withdrawal.length; i++){%>
+                        <tr>
+                            <td><%=withdrawal[i].mowners.name%></td>
+                            <td><%=withdrawal[i].mowners.email%></td>
+                            <td><%=withdrawal[i].amount%></td>
+                            <td><%=withdrawal[i].status%></td>
+                            <td>
+                                <%if(withdrawal[i].status !== 'confirmed'){%>
+                                    <form action="/account/confirm-withdraw?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=withdrawal[i].id%>">
+                                        <button type="submit" class="btn btn-info">Confirm Withdrawal</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-info" disabled>Confirm Withdrawal</button>
+                                <%}%>
+                            </td>
+                            <td>
+                                <%if(withdrawal[i].status !== 'declined'){%>
+                                    <form action="/account/decline-withdraw?_method=PATCH" method="POST">
+                                        <input type="hidden" name="id" value="<%=withdrawal[i].id%>">
+                                        <button type="submit" class="btn btn-warning">Decline Withdrawal</button>
+                                    </form>
+                                <%} else {%>
+                                    <button class="btn btn-warning" disabled>Decline Withdrawal</button>
+                                <%}%>
+                            </td>
+                        </tr>
+                    <%}%>
+                  <%} else {%>
+                    <tr>
+                        <p class="text-center text-danger">No widthrawal yet</p>
+                    </tr>
+                  <%}%>
+              
+            </tbody>
+        </table>
+    </div>
+</div>
